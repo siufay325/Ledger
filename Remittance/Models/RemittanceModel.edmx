@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RemittanceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="RemittanceModelStoreContainer">
+          <EntitySet Name="Cheque" EntityType="RemittanceModel.Store.Cheque" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CurrencyDenomination" EntityType="RemittanceModel.Store.CurrencyDenomination" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EC" EntityType="RemittanceModel.Store.EC" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ledger" EntityType="RemittanceModel.Store.Ledger" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pay" EntityType="RemittanceModel.Store.Pay" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="RemittanceModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Cheque__LedgerID__1BFD2C07" Association="RemittanceModel.Store.FK__Cheque__LedgerID__1BFD2C07">
+            <End Role="Ledger" EntitySet="Ledger" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CurrencyD__Ledge__164452B1" Association="RemittanceModel.Store.FK__CurrencyD__Ledge__164452B1">
+            <End Role="Ledger" EntitySet="Ledger" />
+            <End Role="CurrencyDenomination" EntitySet="CurrencyDenomination" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EC__LedgerID__1ED998B2" Association="RemittanceModel.Store.FK__EC__LedgerID__1ED998B2">
+            <End Role="Ledger" EntitySet="Ledger" />
+            <End Role="EC" EntitySet="EC" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ledger__UserID__1367E606" Association="RemittanceModel.Store.FK__Ledger__UserID__1367E606">
+            <End Role="User" EntitySet="User" />
+            <End Role="Ledger" EntitySet="Ledger" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pay__LedgerID__239E4DCF" Association="RemittanceModel.Store.FK__Pay__LedgerID__239E4DCF">
+            <End Role="Ledger" EntitySet="Ledger" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="ChequeID" />
+          </Key>
+          <Property Name="ChequeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="int" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Bank" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CurrencyDenomination">
+          <Key>
+            <PropertyRef Name="CurrencyDenominationID" />
+          </Key>
+          <Property Name="CurrencyDenominationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="int" Nullable="false" />
+          <Property Name="CurrencyDenominationTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="Quantity10000" Type="smallint" Nullable="false" />
+          <Property Name="Quantity1000" Type="smallint" Nullable="false" />
+          <Property Name="Quantity100" Type="smallint" Nullable="false" />
+          <Property Name="Quantity50" Type="smallint" Nullable="false" />
+          <Property Name="Quantity10" Type="smallint" Nullable="false" />
+          <Property Name="Quantity5" Type="smallint" Nullable="false" />
+          <Property Name="Quantity2" Type="smallint" Nullable="false" />
+          <Property Name="CoinAmount" Type="smallmoney" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EC">
+          <Key>
+            <PropertyRef Name="ECID" />
+          </Key>
+          <Property Name="ECID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="int" Nullable="false" />
+          <Property Name="PurchaseDate" Type="date" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ICNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Telephone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IDType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ReceivedDate" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Currency" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AmountForeignCurrency" Type="money" Nullable="false" />
+          <Property Name="ExchangeRate" Type="decimal" Nullable="false" Precision="12" Scale="4" />
+        </EntityType>
+        <EntityType Name="Ledger">
+          <Key>
+            <PropertyRef Name="LedgerID" />
+          </Key>
+          <Property Name="LedgerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="smallint" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="ReportAmount" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="int" Nullable="false" />
+          <Property Name="PayTypeID" Type="tinyint" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TeamID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Cheque__LedgerID__1BFD2C07">
+          <End Role="Ledger" Type="RemittanceModel.Store.Ledger" Multiplicity="1" />
+          <End Role="Cheque" Type="RemittanceModel.Store.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CurrencyD__Ledge__164452B1">
+          <End Role="Ledger" Type="RemittanceModel.Store.Ledger" Multiplicity="1" />
+          <End Role="CurrencyDenomination" Type="RemittanceModel.Store.CurrencyDenomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="CurrencyDenomination">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EC__LedgerID__1ED998B2">
+          <End Role="Ledger" Type="RemittanceModel.Store.Ledger" Multiplicity="1" />
+          <End Role="EC" Type="RemittanceModel.Store.EC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="EC">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ledger__UserID__1367E606">
+          <End Role="User" Type="RemittanceModel.Store.User" Multiplicity="1" />
+          <End Role="Ledger" Type="RemittanceModel.Store.Ledger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ledger">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pay__LedgerID__239E4DCF">
+          <End Role="Ledger" Type="RemittanceModel.Store.Ledger" Multiplicity="1" />
+          <End Role="Pay" Type="RemittanceModel.Store.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RemittanceModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RemittanceEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Cheques" EntityType="RemittanceModel.Cheque" />
+          <EntitySet Name="CurrencyDenominations" EntityType="RemittanceModel.CurrencyDenomination" />
+          <EntitySet Name="ECs" EntityType="RemittanceModel.EC" />
+          <EntitySet Name="Ledgers" EntityType="RemittanceModel.Ledger" />
+          <EntitySet Name="Pays" EntityType="RemittanceModel.Pay" />
+          <EntitySet Name="Users" EntityType="RemittanceModel.User" />
+          <AssociationSet Name="FK__Cheque__LedgerID__239E4DCF" Association="RemittanceModel.FK__Cheque__LedgerID__239E4DCF">
+            <End Role="Ledger" EntitySet="Ledgers" />
+            <End Role="Cheque" EntitySet="Cheques" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CurrencyD__Ledge__300424B4" Association="RemittanceModel.FK__CurrencyD__Ledge__300424B4">
+            <End Role="Ledger" EntitySet="Ledgers" />
+            <End Role="CurrencyDenomination" EntitySet="CurrencyDenominations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EC__LedgerID__267ABA7A" Association="RemittanceModel.FK__EC__LedgerID__267ABA7A">
+            <End Role="Ledger" EntitySet="Ledgers" />
+            <End Role="EC" EntitySet="ECs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ledger__UserID__1367E606" Association="RemittanceModel.FK__Ledger__UserID__1367E606">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Ledger" EntitySet="Ledgers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pay__LedgerID__36B12243" Association="RemittanceModel.FK__Pay__LedgerID__36B12243">
+            <End Role="Ledger" EntitySet="Ledgers" />
+            <End Role="Pay" EntitySet="Pays" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="ChequeID" />
+          </Key>
+          <Property Name="ChequeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Bank" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Ledger" Relationship="RemittanceModel.FK__Cheque__LedgerID__239E4DCF" FromRole="Cheque" ToRole="Ledger" />
+        </EntityType>
+        <EntityType Name="CurrencyDenomination">
+          <Key>
+            <PropertyRef Name="CurrencyDenominationID" />
+          </Key>
+          <Property Name="CurrencyDenominationID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="Int32" Nullable="false" />
+          <Property Name="CurrencyDenominationTypeID" Type="Byte" Nullable="false" />
+          <Property Name="Quantity10000" Type="Int16" Nullable="false" />
+          <Property Name="Quantity1000" Type="Int16" Nullable="false" />
+          <Property Name="Quantity100" Type="Int16" Nullable="false" />
+          <Property Name="Quantity50" Type="Int16" Nullable="false" />
+          <Property Name="Quantity10" Type="Int16" Nullable="false" />
+          <Property Name="Quantity5" Type="Int16" Nullable="false" />
+          <Property Name="Quantity2" Type="Int16" Nullable="false" />
+          <Property Name="CoinAmount" Type="Decimal" Nullable="false" Precision="10" Scale="4" />
+          <NavigationProperty Name="Ledger" Relationship="RemittanceModel.FK__CurrencyD__Ledge__300424B4" FromRole="CurrencyDenomination" ToRole="Ledger" />
+        </EntityType>
+        <EntityType Name="EC">
+          <Key>
+            <PropertyRef Name="ECID" />
+          </Key>
+          <Property Name="ECID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ICNumber" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Telephone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IDType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Detail" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ReceivedDate" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AmountForeignCurrency" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ExchangeRate" Type="Decimal" Nullable="false" Precision="12" Scale="4" />
+          <NavigationProperty Name="Ledger" Relationship="RemittanceModel.FK__EC__LedgerID__267ABA7A" FromRole="EC" ToRole="Ledger" />
+        </EntityType>
+        <EntityType Name="Ledger">
+          <Key>
+            <PropertyRef Name="LedgerID" />
+          </Key>
+          <Property Name="LedgerID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int16" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReportAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Cheques" Relationship="RemittanceModel.FK__Cheque__LedgerID__239E4DCF" FromRole="Ledger" ToRole="Cheque" />
+          <NavigationProperty Name="CurrencyDenominations" Relationship="RemittanceModel.FK__CurrencyD__Ledge__300424B4" FromRole="Ledger" ToRole="CurrencyDenomination" />
+          <NavigationProperty Name="ECs" Relationship="RemittanceModel.FK__EC__LedgerID__267ABA7A" FromRole="Ledger" ToRole="EC" />
+          <NavigationProperty Name="User" Relationship="RemittanceModel.FK__Ledger__UserID__1367E606" FromRole="Ledger" ToRole="User" />
+          <NavigationProperty Name="Pays" Relationship="RemittanceModel.FK__Pay__LedgerID__36B12243" FromRole="Ledger" ToRole="Pay" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LedgerID" Type="Int32" Nullable="false" />
+          <Property Name="PayTypeID" Type="Byte" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Ledger" Relationship="RemittanceModel.FK__Pay__LedgerID__36B12243" FromRole="Pay" ToRole="Ledger" />
+          <Property Type="String" Name="Remark" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TeamID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Ledgers" Relationship="RemittanceModel.FK__Ledger__UserID__1367E606" FromRole="User" ToRole="Ledger" />
+        </EntityType>
+        <Association Name="FK__Cheque__LedgerID__239E4DCF">
+          <End Role="Ledger" Type="RemittanceModel.Ledger" Multiplicity="1" />
+          <End Role="Cheque" Type="RemittanceModel.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CurrencyD__Ledge__300424B4">
+          <End Role="Ledger" Type="RemittanceModel.Ledger" Multiplicity="1" />
+          <End Role="CurrencyDenomination" Type="RemittanceModel.CurrencyDenomination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="CurrencyDenomination">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EC__LedgerID__267ABA7A">
+          <End Role="Ledger" Type="RemittanceModel.Ledger" Multiplicity="1" />
+          <End Role="EC" Type="RemittanceModel.EC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="EC">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ledger__UserID__1367E606">
+          <End Role="User" Type="RemittanceModel.User" Multiplicity="1" />
+          <End Role="Ledger" Type="RemittanceModel.Ledger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ledger">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pay__LedgerID__36B12243">
+          <End Role="Ledger" Type="RemittanceModel.Ledger" Multiplicity="1" />
+          <End Role="Pay" Type="RemittanceModel.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ledger">
+              <PropertyRef Name="LedgerID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="LedgerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RemittanceModelStoreContainer" CdmEntityContainer="RemittanceEntities">
+          <EntitySetMapping Name="Cheques">
+            <EntityTypeMapping TypeName="RemittanceModel.Cheque">
+              <MappingFragment StoreEntitySet="Cheque">
+                <ScalarProperty Name="ChequeID" ColumnName="ChequeID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyDenominations">
+            <EntityTypeMapping TypeName="RemittanceModel.CurrencyDenomination">
+              <MappingFragment StoreEntitySet="CurrencyDenomination">
+                <ScalarProperty Name="CurrencyDenominationID" ColumnName="CurrencyDenominationID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="CurrencyDenominationTypeID" ColumnName="CurrencyDenominationTypeID" />
+                <ScalarProperty Name="Quantity10000" ColumnName="Quantity10000" />
+                <ScalarProperty Name="Quantity1000" ColumnName="Quantity1000" />
+                <ScalarProperty Name="Quantity100" ColumnName="Quantity100" />
+                <ScalarProperty Name="Quantity50" ColumnName="Quantity50" />
+                <ScalarProperty Name="Quantity10" ColumnName="Quantity10" />
+                <ScalarProperty Name="Quantity5" ColumnName="Quantity5" />
+                <ScalarProperty Name="Quantity2" ColumnName="Quantity2" />
+                <ScalarProperty Name="CoinAmount" ColumnName="CoinAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ECs">
+            <EntityTypeMapping TypeName="RemittanceModel.EC">
+              <MappingFragment StoreEntitySet="EC">
+                <ScalarProperty Name="ECID" ColumnName="ECID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ICNumber" ColumnName="ICNumber" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="AmountForeignCurrency" ColumnName="AmountForeignCurrency" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ledgers">
+            <EntityTypeMapping TypeName="RemittanceModel.Ledger">
+              <MappingFragment StoreEntitySet="Ledger">
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReportAmount" ColumnName="ReportAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pays">
+            <EntityTypeMapping TypeName="RemittanceModel.Pay">
+              <MappingFragment StoreEntitySet="Pay">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="PayID" ColumnName="PayID" />
+                <ScalarProperty Name="LedgerID" ColumnName="LedgerID" />
+                <ScalarProperty Name="PayTypeID" ColumnName="PayTypeID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RemittanceModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

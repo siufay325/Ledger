@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9c8fbbe5fed48889720a8e833ba05af" Name="Diagram1">
+        <EntityTypeShape EntityType="RemittanceModel.Cheque" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemittanceModel.CurrencyDenomination" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemittanceModel.EC" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemittanceModel.Ledger" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemittanceModel.Pay" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemittanceModel.User" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="RemittanceModel.FK__Cheque__LedgerID__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="RemittanceModel.FK__CurrencyD__Ledge__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="RemittanceModel.FK__EC__LedgerID__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="RemittanceModel.FK__Ledger__UserID__1367E606" ManuallyRouted="false" />
+        <AssociationConnector Association="RemittanceModel.FK__Pay__LedgerID__36B12243" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
